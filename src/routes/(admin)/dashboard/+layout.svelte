@@ -29,9 +29,9 @@
   }
 </script>
 
-<div class="min-h-screen bg-neutral-50 flex">
+<div class="min-h-screen bg-neutral-50 flex ">
   <!-- Sidebar -->
-  <aside class="w-64 bg-white border-r border-neutral-100 flex flex-col hidden md:flex">
+  <aside class="w-64 bg-white border-r border-neutral-100 flex flex-col hidden md:flex ">
     <div class="p-8 border-b border-neutral-50 flex items-center gap-3">
         <div class="w-10 h-10 bg-brand-violet rounded-xl flex items-center justify-center text-white font-bold">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7.5a4.5 4.5 0 1 1 4.5 4.5M12 7.5A4.5 4.5 0 1 0 7.5 12M12 7.5V12m0 0a4.5 4.5 0 1 0 4.5 4.5M12 12a4.5 4.5 0 1 1-4.5 4.5m4.5-4.5h.01"/></svg>
@@ -66,14 +66,14 @@
         <a href="/" class="flex items-center gap-3 p-3 rounded-xl bg-neutral-100 font-bold text-neutral-600 hover:bg-neutral-200 transition-all text-sm">
             Ver Tienda
         </a>
-        <button onclick={logout} class="w-full flex items-center gap-3 p-3 rounded-xl bg-red-50 font-bold text-red-600 hover:bg-red-100 transition-all text-sm">
+        <button onclick={logout} class="w-full flex items-center gap-3 p-3 rounded-xl bg-red-50 font-bold text-red-600 hover:bg-red-100 transition-all text-sm cursor-pointer">
             Cerrar Sesión
         </button>
     </div>
   </aside>
 
   <!-- Mobile Sidebar (Floating Bottom) -->
-  <nav class="md:hidden fixed bottom-6 left-6 right-6 bg-white/80 backdrop-blur-xl border border-neutral-100 rounded-[2.5rem] shadow-2xl z-50 p-2 flex justify-around items-center">
+  <nav class="md:hidden fixed bottom-6 left-6 right-6 bg-white/80 backdrop-blur-xl border border-neutral-100 rounded-[2.5rem] shadow-2xl z-50 p-2 flex justify-around items-center ">
     <a href="/dashboard" class="p-4 rounded-3xl text-neutral-400 hover:text-brand-violet transition-all group relative">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
     </a>
@@ -100,8 +100,10 @@
                 <p class="text-neutral-400 font-bold uppercase tracking-widest text-[9px] mt-2">Hola, {username}</p>
             </div>
         </div>
-        <div class="w-10 h-10 md:w-12 md:h-12 rounded-full overflow-hidden bg-brand-violet/10 border-2 border-white shadow-sm flex items-center justify-center">
-            <img src={avatarUrl || `https://api.dicebear.com/7.x/avataaars/svg?seed=${username}`} alt="avatar" class="w-full h-full object-cover" />
+        <div class="flex items-center gap-4">
+            <div class="w-10 h-10 md:w-12 md:h-12 rounded-full overflow-hidden bg-brand-violet/10 border-2 border-white shadow-sm flex items-center justify-center">
+                <img src={avatarUrl || `https://api.dicebear.com/7.x/avataaars/svg?seed=${username}`} alt="avatar" class="w-full h-full object-cover" />
+            </div>
         </div>
     </header>
 

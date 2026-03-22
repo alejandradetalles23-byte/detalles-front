@@ -37,8 +37,8 @@
   }
 </script>
 
-<div class="min-h-[80vh] flex items-center justify-center px-4 py-24 bg-neutral-50">
-  <div class="w-full max-w-md bg-white rounded-[2.5rem] p-10 shadow-2xl border border-neutral-100 relative overflow-hidden">
+<div class="min-h-screen flex items-center justify-center px-4 py-24 bg-neutral-50 transition-colors duration-500">
+  <div class="w-full max-w-md bg-white rounded-[2.5rem] p-10 shadow-2xl border border-neutral-100 relative overflow-hidden transition-colors">
     <!-- Decorative background -->
     <div class="absolute -top-24 -right-24 w-48 h-48 bg-brand-red/10 rounded-full blur-3xl"></div>
     <div class="absolute -bottom-24 -left-24 w-48 h-48 bg-brand-violet/10 rounded-full blur-3xl"></div>
@@ -70,7 +70,7 @@
           autocorrect="off"
           spellcheck="false"
           autocomplete="username"
-          class="w-full px-5 py-4 bg-neutral-50 border border-neutral-200 rounded-2xl focus:ring-4 focus:ring-brand-orange/10 focus:border-brand-orange outline-none transition-all placeholder:text-neutral-300"
+          class="w-full px-5 py-4 bg-neutral-50 border border-neutral-200 rounded-2xl focus:ring-4 focus:ring-brand-orange/10 focus:border-brand-orange outline-none transition-all placeholder:text-neutral-300 text-neutral-900"
           placeholder="Tu usuario"
         />
       </div>
@@ -83,7 +83,7 @@
               id="password"
               bind:value={password}
               required
-              class="w-full px-5 py-4 bg-neutral-50 border border-neutral-200 rounded-2xl focus:ring-4 focus:ring-brand-orange/10 focus:border-brand-orange outline-none transition-all placeholder:text-neutral-300 pr-14"
+              class="w-full px-5 py-4 bg-neutral-50 border border-neutral-200 rounded-2xl focus:ring-4 focus:ring-brand-orange/10 focus:border-brand-orange outline-none transition-all placeholder:text-neutral-300 pr-14 text-neutral-900"
               placeholder="••••••••"
             />
             <button 

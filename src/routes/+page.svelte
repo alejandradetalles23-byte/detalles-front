@@ -39,11 +39,11 @@
       >
         <div>
           <h2
-            class="text-4xl md:text-5xl font-black text-neutral-900 dark:text-neutral-50 mb-4 tracking-tight"
+            class="text-4xl md:text-5xl font-black text-neutral-900 mb-4 tracking-tight"
           >
             Nuestros Arreglos
           </h2>
-          <p class="text-neutral-500 dark:text-neutral-400 max-w-lg">
+          <p class="text-neutral-500 max-w-lg font-medium">
             Descubre nuestra colección para cada ocasión especial.
           </p>
         </div>

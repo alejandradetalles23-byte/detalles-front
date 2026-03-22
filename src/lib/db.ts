@@ -10,6 +10,7 @@ export interface Product {
     price: number;
     category_id?: number;
     views: number;
+    likes: number;
     photos: string[];
     created_at: string;
 }
@@ -23,6 +24,7 @@ export interface Stats {
     completed_sales: number;
     cancelled_sales: number;
     most_viewed: { name: string, count: number }[];
+    most_liked: { name: string, count: number }[];
     most_ordered: { name: string, count: number }[];
 }
 
@@ -96,6 +98,17 @@ export async function getStats(): Promise<Stats | null> {
 export async function registerView(id: number): Promise<void> {
     try {
         await fetch(`${API_URL}/stats/view/${id}`, { method: "POST" });
+    } catch (e) {
+        console.error(e);
+    }
+}
+
+/**
+ * Registra un 'Me gusta' de producto en el backend (incrementa contador en DB)
+ */
+export async function registerLike(id: number): Promise<void> {
+    try {
+        await fetch(`${API_URL}/stats/like/${id}`, { method: "POST" });
     } catch (e) {
         console.error(e);
     }

@@ -124,7 +124,7 @@
                     </div>
                     <div class="p-6">
                         <div class="flex justify-between items-start mb-2">
-                            <h4 class="font-black text-neutral-900">{p.title}</h4>
+                            <h4 class="font-black text-neutral-900 ">{p.title}</h4>
                             <span class="text-brand-violet font-black">${p.price}</span>
                         </div>
                         <p class="text-xs text-neutral-400 font-bold uppercase tracking-widest">
@@ -139,7 +139,7 @@
 
 {#if showModal}
     <div class="fixed inset-0 bg-neutral-900/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 overflow-y-auto">
-        <div class="bg-white w-full max-w-4xl rounded-[3rem] shadow-2xl relative overflow-hidden animate-in zoom-in-95 duration-300">
+        <div class="bg-white w-full max-w-4xl rounded-[3rem] shadow-2xl border border-neutral-100 relative overflow-hidden animate-in zoom-in-95 duration-300">
             <button onclick={() => showModal = false} class="absolute top-8 right-8 text-neutral-400 hover:text-neutral-900 transition-all">
                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6 6 18M6 6l12 12"/></svg>
             </button>
@@ -153,26 +153,26 @@
                     <div class="space-y-6">
                         <div>
                             <label class="block text-[10px] font-black text-neutral-400 uppercase tracking-widest mb-2 px-1">Título del Arreglo</label>
-                            <input type="text" bind:value={title} required class="w-full px-6 py-4 bg-neutral-50 border border-neutral-100 rounded-2xl outline-none focus:ring-4 focus:ring-brand-violet/10 font-bold" />
+                            <input type="text" bind:value={title} required class="w-full px-6 py-4 bg-neutral-50 border border-neutral-100 rounded-2xl outline-none focus:ring-4 focus:ring-brand-violet/10 font-bold text-neutral-900 " />
                         </div>
                         <div class="grid grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-[10px] font-black text-neutral-400 uppercase tracking-widest mb-2 px-1">Precio ($)</label>
-                                <input type="number" bind:value={price} required class="w-full px-6 py-4 bg-neutral-50 border border-neutral-100 rounded-2xl outline-none focus:ring-4 focus:ring-brand-violet/10 font-bold" />
+                                <input type="number" bind:value={price} required class="w-full px-6 py-4 bg-neutral-50 border border-neutral-100 rounded-2xl outline-none focus:ring-4 focus:ring-brand-violet/10 font-bold text-neutral-900 " />
                             </div>
                             <div>
                                 <label class="block text-[10px] font-black text-neutral-400 uppercase tracking-widest mb-2 px-1">Categoría</label>
-                                <select bind:value={categoryId} class="w-full px-6 py-4 bg-neutral-50 border border-neutral-100 rounded-2xl outline-none focus:ring-4 focus:ring-brand-violet/10 font-bold appearance-none">
-                                    <option value={null}>Sin categoría</option>
+                                <select bind:value={categoryId} class="w-full px-6 py-4 bg-neutral-50 border border-neutral-100 rounded-2xl outline-none focus:ring-4 focus:ring-brand-violet/10 font-bold appearance-none text-neutral-900 ">
+                                    <option value={null} class="">Sin categoría</option>
                                     {#each categories as cat}
-                                        <option value={cat.id}>{cat.name}</option>
+                                        <option value={cat.id} class="">{cat.name}</option>
                                     {/each}
                                 </select>
                             </div>
                         </div>
                         <div>
                             <label class="block text-[10px] font-black text-neutral-400 uppercase tracking-widest mb-2 px-1">Descripción</label>
-                            <textarea bind:value={description} required rows="4" class="w-full px-6 py-4 bg-neutral-50 border border-neutral-100 rounded-2xl outline-none focus:ring-4 focus:ring-brand-violet/10 font-medium resize-none"></textarea>
+                            <textarea bind:value={description} required rows="4" class="w-full px-6 py-4 bg-neutral-50 border border-neutral-100 rounded-2xl outline-none focus:ring-4 focus:ring-brand-violet/10 font-medium resize-none text-neutral-900 "></textarea>
                         </div>
                     </div>
 

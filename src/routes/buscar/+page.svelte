@@ -22,7 +22,7 @@
 
 <div class="max-w-7xl mx-auto px-4 md:px-12 py-16">
   <div class="mb-12">
-    <h1 class="text-5xl font-black text-neutral-900 mb-8 font-serif text-center leading-tight">Encuentra el Arreglo Perfecto</h1>
+    <h1 class="text-5xl font-black mb-8 font-serif text-center leading-tight">Encuentra el Arreglo Perfecto</h1>
     
     <div class="max-w-2xl mx-auto relative group">
         <input 

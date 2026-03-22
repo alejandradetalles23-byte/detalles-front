@@ -1,35 +1,59 @@
 <script lang="ts">
   import type { Product } from "$lib/db";
-  import { getWhatsAppLink } from "$lib/db";
+  import { getWhatsAppLink, registerLike } from "$lib/db";
+  import { onMount } from "svelte";
 
   interface Props {
     product: Product;
   }
   let { product }: Props = $props();
+  let liked = $state(false);
+
+  onMount(() => {
+    liked = localStorage.getItem(`liked_${product.id}`) === 'true';
+  });
+
+  async function toggleLike() {
+    if (liked) return; 
+    liked = true;
+    localStorage.setItem(`liked_${product.id}`, 'true');
+    await registerLike(product.id);
+  }
 
   const waLink = getWhatsAppLink(product.title, product.price);
 </script>
 
-<div class="group bg-white dark:bg-neutral-900 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-neutral-100 dark:border-neutral-800 flex flex-col h-full transform hover:-translate-y-1">
+<div class="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-neutral-100 flex flex-col h-full transform hover:-translate-y-1">
   <!-- Image -->
-  <a href="/producto/{product.id}" class="relative aspect-[4/5] overflow-hidden">
-    <img
-      src={product.photos[0]}
-      alt={product.title}
-      class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
-    />
+  <div class="relative aspect-[4/5] overflow-hidden">
+    <a href="/producto/{product.id}" class="block w-full h-full">
+        <img
+        src={product.photos[0]}
+        alt={product.title}
+        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
+        />
+    </a>
+    
+    <!-- Heart Button -->
+    <button 
+        onclick={toggleLike}
+        class="absolute top-4 right-4 w-10 h-10 rounded-full flex items-center justify-center transition-all z-10 {liked ? 'bg-red-500 text-white' : 'bg-white/80 backdrop-blur-sm text-neutral-400 hover:text-red-500 hover:scale-110'}"
+    >
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill={liked ? "currentColor" : "none"} stroke="currentColor" stroke-width="2.5"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+    </button>
+
     <div class="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/60 to-transparent translate-y-full group-hover:translate-y-0 transition-transform duration-300">
         <span class="text-white text-sm font-medium">Ver detalles</span>
     </div>
-  </a>
+  </div>
 
   <!-- Content -->
   <div class="p-6 flex flex-col flex-grow">
     <div class="flex justify-between items-start mb-2">
-      <h3 class="text-lg font-bold text-neutral-800 dark:text-neutral-100 line-clamp-1">{product.title}</h3>
+      <h3 class="text-lg font-bold text-neutral-800 line-clamp-1">{product.title}</h3>
       <span class="text-lg font-bold text-brand-red">${product.price.toFixed(2)}</span>
     </div>
-    <p class="text-neutral-500 dark:text-neutral-400 text-sm line-clamp-2 mb-6 flex-grow">
+    <p class="text-neutral-500 text-sm line-clamp-2 mb-6 flex-grow">
       {product.description}
     </p>
 

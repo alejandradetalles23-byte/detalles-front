@@ -20,13 +20,9 @@
 }
 
 body {
-  @apply bg-neutral-50 text-neutral-900 antialiased font-sans transition-colors duration-500;
+  @apply bg-neutral-50 text-neutral-900 antialiased font-sans min-h-screen selection:bg-brand-violet selection:text-white;
 }
 
-.dark body {
-  @apply bg-neutral-950 text-neutral-100;
-}
-
-h1, h2, h3 {
+h1, h2, h3, h4, h5, h6 {
   @apply font-serif;
 }

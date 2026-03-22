@@ -80,8 +80,8 @@
   }
 </script>
 
-<div class="max-w-4xl space-y-12">
-    <div class="bg-white p-10 rounded-[2.5rem] border border-neutral-100 shadow-sm">
+<div class="max-w-4xl space-y-12 ">
+    <div class="bg-white p-10 rounded-[2.5rem] border border-neutral-100 shadow-sm ">
         <h3 class="text-3xl font-black text-neutral-900 mb-8 flex items-center gap-3">
              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="text-brand-violet"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
              Gestión de Categorías
@@ -92,7 +92,7 @@
                 type="text" 
                 bind:value={newName} 
                 placeholder="Nueva categoría (ej: Cumpleaños)" 
-                class="flex-grow px-6 py-4 bg-neutral-50 border border-neutral-200 rounded-2xl outline-none focus:ring-4 focus:ring-brand-violet/10 focus:border-brand-violet transition-all font-bold"
+                class="flex-grow px-6 py-4 bg-neutral-50 border border-neutral-200 rounded-2xl outline-none focus:ring-4 focus:ring-brand-violet/10 focus:border-brand-violet transition-all font-bold text-neutral-900 "
             />
             <button 
                 type="submit" 
@@ -108,12 +108,12 @@
                 <p class="text-neutral-400 animate-pulse">Cargando categorías...</p>
             {:else}
                 {#each categories as cat}
-                    <div class="flex items-center justify-between p-4 bg-neutral-50 rounded-2xl group hover:bg-white hover:shadow-xl transition-all border border-transparent hover:border-neutral-100">
+                    <div class="flex items-center justify-between p-4 bg-neutral-50 rounded-2xl group hover:bg-white hover:shadow-xl transition-all border border-transparent hover:border-neutral-100 ">
                         {#if editingId === cat.id}
                             <input 
                                 type="text" 
                                 bind:value={editName} 
-                                class="flex-grow px-4 py-2 bg-white border border-brand-violet rounded-xl outline-none font-bold mr-4"
+                                class="flex-grow px-4 py-2 bg-white border border-brand-violet rounded-xl outline-none font-bold mr-4 text-neutral-900 "
                             />
                             <div class="flex gap-2">
                                 <button onclick={() => updateCategory(cat.id)} class="p-2 text-green-600 hover:bg-green-50 rounded-lg">

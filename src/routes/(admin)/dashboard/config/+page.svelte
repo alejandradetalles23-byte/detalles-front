@@ -6,7 +6,6 @@
   let aboutText = $state("");
   let adminName = $state("Administrador");
   let address = $state("Edo. Aragua, Venezuela");
-  let mapsUrl = $state("");
   let instagramUrl = $state("");
   let footerText = $state("");
   let logoUrl = $state<string | null>(null);
@@ -29,7 +28,6 @@
         avatarUrl = data.admin_avatar_url;
         adminName = data.admin_name || "Administrador";
         address = data.address || "Edo. Aragua, Venezuela";
-        mapsUrl = data.maps_url || "";
         instagramUrl = data.instagram_url || "";
         footerText = data.footer_text || "";
     } catch (e) {
@@ -48,7 +46,6 @@
     formData.append("about_us", aboutText);
     formData.append("admin_name", adminName);
     formData.append("address", address);
-    formData.append("maps_url", mapsUrl);
     formData.append("instagram_url", instagramUrl);
     formData.append("footer_text", footerText);
     if (logoFile) formData.append("logo", logoFile);
@@ -90,7 +87,7 @@
             <div class="w-12 h-12 border-4 border-brand-violet border-t-transparent rounded-full animate-spin"></div>
         </div>
     {:else}
-    <div class="bg-white p-12 rounded-[3rem] border border-neutral-100 shadow-sm relative overflow-hidden group">
+    <div class="bg-white p-12 rounded-[3rem] border border-neutral-100 shadow-sm relative overflow-hidden group ">
         <div class="absolute -top-32 -right-32 w-64 h-64 bg-brand-orange/5 rounded-full blur-3xl group-hover:bg-brand-orange/10 transition-all"></div>
         
         <h3 class="text-3xl font-black text-neutral-900 mb-2 font-serif flex items-center gap-4">
@@ -156,10 +153,6 @@
                         </div>
                         <input type="text" bind:value={address} required class="flex-grow px-6 py-4 bg-neutral-50 border border-neutral-200 rounded-2xl outline-none focus:ring-4 focus:ring-brand-violet/10 focus:border-brand-violet transition-all text-lg font-bold" />
                     </div>
-                </div>
-                <div>
-                    <label class="block text-xs font-black text-neutral-400 uppercase tracking-widest mb-4 px-2">Enlace Google Maps</label>
-                    <input type="url" bind:value={mapsUrl} placeholder="https://maps.app.goo.gl/..." class="w-full px-6 py-4 bg-neutral-50 border border-neutral-200 rounded-2xl outline-none focus:ring-4 focus:ring-brand-violet/10 focus:border-brand-violet transition-all text-sm font-medium" />
                 </div>
             </div>
 

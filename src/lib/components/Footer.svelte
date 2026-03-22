@@ -3,7 +3,6 @@
   import { API_URL } from "$lib/db";
 
   let address = $state("Edo. Zulia, Venezuela");
-  let mapsUrl = $state("");
   let whatsapp = $state("");
   let instagramUrl = $state("");
   let footerText = $state("");
@@ -13,7 +12,6 @@
       const res = await fetch(`${API_URL}/settings/`);
       const data = await res.json();
       address = data.address || "Edo. Aragua, Venezuela";
-      mapsUrl = data.maps_url || "";
       whatsapp = data.whatsapp_number || "";
       instagramUrl = data.instagram_url || "";
       footerText = data.footer_text || "";
@@ -28,7 +26,7 @@
 </script>
 
 <footer
-  class="bg-neutral-900 dark:bg-black text-neutral-400 py-20 px-4 md:px-12 border-t border-neutral-800 relative z-20 transition-colors duration-500"
+  class="bg-neutral-900 dark:bg-black text-neutral-300 py-20 px-4 md:px-12 border-t border-neutral-800 relative z-20 transition-colors duration-500"
 >
   <div class="max-w-7xl mx-auto">
     <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16 px-4">
@@ -113,68 +111,32 @@
               class="block text-[10px] font-black uppercase text-neutral-500 mb-2 tracking-[0.2em]"
               >Donde encontrarnos</span
             >
-            {#if mapsUrl}
-              <a
-                href={mapsUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="flex items-start gap-3 hover:text-white transition-all group"
-              >
-                <div
-                  class="mt-1 p-2 bg-neutral-800 rounded-lg group-hover:bg-brand-red group-hover:text-white transition-colors"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    ><path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                    /><path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                    /></svg
-                  >
-                </div>
-                <span class="leading-tight text-white font-bold text-lg"
-                  >{address}</span
-                >
-              </a>
-            {:else}
-              <div class="flex items-start gap-3">
-                <div class="mt-1 p-2 bg-neutral-800 rounded-lg">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    ><path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                    /><path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                    /></svg
-                  >
-                </div>
-                <span class="leading-tight text-white font-bold text-lg"
-                  >{address}</span
+            <div class="flex items-start gap-3">
+              <div class="mt-1 p-2 bg-neutral-800 rounded-lg">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  ><path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                  /><path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                  /></svg
                 >
               </div>
-            {/if}
+              <span class="leading-tight text-white font-bold text-lg"
+                >{address}</span
+              >
+            </div>
           </li>
           <li>
             <span
