@@ -1,0 +1,28 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/forms';
+@plugin '@tailwindcss/typography';
+
+@theme {
+  --color-brand-red: #ef4444;
+  --color-brand-orange: #f97316;
+  --color-brand-violet: #8b5cf6;
+  
+  --font-serif: 'Playfair Display', serif;
+  --font-sans: 'Inter', system-ui, sans-serif;
+}
+
+:root {
+  --brand-gradient: linear-gradient(135deg, var(--color-brand-violet), var(--color-brand-orange));
+}
+
+.btn-primary {
+  @apply bg-linear-to-r from-brand-violet to-brand-orange text-white font-bold transition-all shadow-lg hover:shadow-brand-violet/20 hover:scale-[1.02] active:scale-[0.98] cursor-pointer;
+}
+
+body {
+  @apply bg-neutral-50 text-neutral-900 antialiased font-sans;
+}
+
+h1, h2, h3 {
+  @apply font-serif;
+}
