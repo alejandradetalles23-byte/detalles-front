@@ -114,8 +114,8 @@
                         {:else}
                             <svg class="text-neutral-300" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
                         {/if}
-                        <input type="file" accept="image/*" onchange={(e) => handleFile(e, 'logo')} class="absolute inset-0 opacity-0 cursor-pointer" />
-                        <div class="absolute inset-0 bg-neutral-900/40 opacity-0 group-hover:opacity-100 transition-all flex items-center justify-center text-white text-xs font-black tracking-widest">CAMBIAR LOGO</div>
+                        <input type="file" accept="image/*" onchange={(e) => handleFile(e, 'logo')} class="absolute inset-0 opacity-0 cursor-pointer z-10" />
+                        <div class="absolute inset-0 bg-neutral-900/40 opacity-0 group-hover:opacity-100 transition-all flex items-center justify-center text-white text-xs font-black tracking-widest pointer-events-none">CAMBIAR LOGO</div>
                     </div>
                 </div>
 
@@ -127,8 +127,8 @@
                         {:else}
                              <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=AleDet" alt="default avatar" class="w-full h-full opacity-50" />
                         {/if}
-                        <input type="file" accept="image/*" onchange={(e) => handleFile(e, 'avatar')} class="absolute inset-0 opacity-0 cursor-pointer" />
-                         <div class="absolute inset-0 bg-neutral-900/40 opacity-0 group-hover:opacity-100 transition-all flex items-center justify-center text-white text-[8px] font-black tracking-widest uppercase">Cambiar Foto</div>
+                        <input type="file" accept="image/*" onchange={(e) => handleFile(e, 'avatar')} class="absolute inset-0 opacity-0 cursor-pointer z-10" />
+                         <div class="absolute inset-0 bg-neutral-900/40 opacity-0 group-hover:opacity-100 transition-all flex items-center justify-center text-white text-[8px] font-black tracking-widest uppercase pointer-events-none">Cambiar Foto</div>
                     </div>
                 </div>
             </div>

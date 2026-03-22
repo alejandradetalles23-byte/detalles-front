@@ -1,12 +1,23 @@
 <script lang="ts">
   import { page } from "$app/state";
   import { onMount } from "svelte";
+  import { getSettings } from "$lib/db";
 
   let user_logged = $state(false);
   let mobileMenuOpen = $state(false);
+  
+  let logoUrl = $state<string | null>(null);
+  let avatarUrl = $state<string | null>(null);
+  let adminName = $state("Admin");
 
-  onMount(() => {
+  onMount(async () => {
     user_logged = !!localStorage.getItem("token");
+    const settings = await getSettings();
+    if (settings) {
+        logoUrl = settings.logo_url;
+        avatarUrl = settings.admin_avatar_url;
+        adminName = settings.admin_name || "Admin";
+    }
   });
 
   function logout() {
@@ -30,8 +41,12 @@
       <!-- Logo -->
       <div class="flex-shrink-0 flex items-center gap-2">
         <a href="/" class="group flex items-center gap-2">
-          <div class="w-10 h-10 bg-gradient-to-br from-brand-red via-brand-orange to-brand-violet rounded-full flex items-center justify-center text-white font-bold shadow-lg group-hover:scale-110 transition-transform">
-            AD
+          <div class="w-10 h-10 {logoUrl ? '' : 'bg-gradient-to-br from-brand-red via-brand-orange to-brand-violet'} rounded-full flex items-center justify-center text-white font-bold shadow-lg group-hover:scale-110 transition-transform overflow-hidden shrink-0">
+             {#if logoUrl}
+                <img src={logoUrl} alt="Logo" class="w-full h-full object-cover bg-white" />
+             {:else}
+                AD
+             {/if}
           </div>
           <span class="hidden lg:inline text-xl font-serif font-black bg-clip-text text-transparent bg-gradient-to-r from-brand-red to-brand-violet whitespace-nowrap">
             Alejandra Detalles
@@ -54,12 +69,15 @@
       <!-- Left items (Login/Logout) (Visible from 768px/md) -->
       <div class="hidden md:flex items-center gap-6">
         {#if user_logged}
-          <div class="flex items-center gap-4">
-            <a href="/dashboard" class="px-5 py-2.5 rounded-xl text-brand-violet text-sm font-bold hover:bg-brand-violet hover:text-white transition-all border border-brand-violet/20">
-              Panel Admin
+          <div class="flex items-center gap-3">
+            <a href="/dashboard" class="group flex items-center gap-2 px-1.5 py-1.5 pr-4 rounded-full border border-brand-violet/20 hover:bg-brand-violet/5 hover:border-brand-violet/40 transition-all shadow-sm">
+                <div class="w-7 h-7 rounded-full bg-brand-violet/10 overflow-hidden flex items-center justify-center border border-white shrink-0 shadow-sm">
+                    <img src={avatarUrl || `https://api.dicebear.com/7.x/avataaars/svg?seed=${adminName}`} alt="avatar" class="w-full h-full object-cover">
+                </div>
+                <span class="text-brand-violet text-sm font-bold truncate max-w-[120px] group-hover:text-brand-violet transition-colors">Panel {adminName}</span>
             </a>
-            <button onclick={logout} class="px-4 py-2 text-sm font-semibold text-neutral-600 hover:text-brand-red transition-all cursor-pointer">
-              Cerrar Sesión
+            <button onclick={logout} class="px-2 py-2 text-neutral-400 hover:text-brand-red transition-all cursor-pointer rounded-full hover:bg-red-50" title="Cerrar Sesión">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg>
             </button>
           </div>
         {:else}
@@ -100,7 +118,12 @@
         
         <div class="pt-6 mt-6 border-t border-neutral-100 space-y-3">
              {#if user_logged}
-                <a href="/dashboard" onclick={() => mobileMenuOpen = false} class="block w-full text-center py-4 rounded-2xl text-brand-violet font-black border border-brand-violet/20 hover:bg-brand-violet/5 transition-colors">PANEL ADMIN</a>
+                <a href="/dashboard" onclick={() => mobileMenuOpen = false} class="w-full flex items-center justify-center gap-3 py-3 rounded-2xl border border-brand-violet/20 hover:bg-brand-violet/5 transition-colors">
+                    <div class="w-8 h-8 rounded-full overflow-hidden shrink-0 shadow-sm">
+                        <img src={avatarUrl || `https://api.dicebear.com/7.x/avataaars/svg?seed=${adminName}`} alt="avatar" class="w-full h-full object-cover">
+                    </div>
+                    <span class="text-brand-violet font-black">Panel {adminName}</span>
+                </a>
                 <button onclick={logout} class="w-full text-center py-4 rounded-2xl text-red-600 font-bold hover:bg-red-50 cursor-pointer transition-colors">Cerrar Sesión</button>
              {:else}
                 <a href="/login" onclick={() => mobileMenuOpen = false} class="block w-full text-center py-5 rounded-2xl bg-neutral-900 text-white font-black tracking-widest uppercase text-sm">Iniciar Sesión</a>
