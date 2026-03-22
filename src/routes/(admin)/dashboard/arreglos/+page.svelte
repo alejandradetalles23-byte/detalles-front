@@ -113,7 +113,7 @@
                 <div class="bg-white rounded-[2rem] border border-neutral-100 shadow-sm overflow-hidden group hover:shadow-2xl transition-all">
                     <div class="aspect-square relative">
                         <img src={p.photos[0] || '/placeholder.png'} alt={p.title} class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                        <div class="absolute inset-0 bg-neutral-900/40 opacity-0 group-hover:opacity-100 transition-all flex items-center justify-center gap-4">
+                        <div class="absolute inset-0 bg-neutral-900/40 opacity-0 group-hover:opacity-100 transition-all hidden sm:flex items-center justify-center gap-4">
                             <button onclick={() => openEdit(p)} class="w-12 h-12 bg-white text-neutral-900 rounded-xl flex items-center justify-center hover:bg-brand-violet hover:text-white transition-all transform -translate-y-4 group-hover:translate-y-0 duration-300">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>
                             </button>
@@ -122,14 +122,25 @@
                             </button>
                         </div>
                     </div>
-                    <div class="p-6">
+                    <div class="p-5 sm:p-6">
                         <div class="flex justify-between items-start mb-2">
-                            <h4 class="font-black text-neutral-900 ">{p.title}</h4>
+                            <h4 class="font-black text-neutral-900 text-lg sm:text-base leading-tight pr-2">{p.title}</h4>
                             <span class="text-brand-violet font-black">${p.price}</span>
                         </div>
-                        <p class="text-xs text-neutral-400 font-bold uppercase tracking-widest">
-                            {categories.find(c => c.id === p.category_id)?.name || 'Sin categoría'}
-                        </p>
+                        <div class="flex justify-between items-end mt-4 sm:mt-0">
+                            <p class="text-xs text-neutral-400 font-bold uppercase tracking-widest mt-1">
+                                {categories.find(c => c.id === p.category_id)?.name || 'Sin categoría'}
+                            </p>
+                            <!-- Mobile Action Buttons -->
+                            <div class="flex sm:hidden gap-2">
+                                <button onclick={() => openEdit(p)} class="p-2.5 bg-neutral-100 text-neutral-600 hover:text-brand-violet rounded-xl">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>
+                                </button>
+                                <button onclick={() => handleDelete(p.id)} class="p-2.5 bg-red-50 text-red-600 rounded-xl">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 6h18m-2 0v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6m3 0V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             {/each}

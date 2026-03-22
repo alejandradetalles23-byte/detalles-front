@@ -1,6 +1,7 @@
 <script lang="ts">
   import { page } from "$app/state";
   import { onMount } from "svelte";
+
   let user_logged = $state(false);
   let mobileMenuOpen = $state(false);
 
@@ -17,9 +18,9 @@
   const links = [
     { name: "Inicio", href: "/" },
     { name: "Arreglos", href: "/arreglos" },
+    { name: "Categorías", href: "/categorias" },
     { name: "Búsqueda", href: "/buscar" },
     { name: "Nosotros", href: "/nosotros" },
-    { name: "Contacto", href: "/contacto" },
   ];
 </script>
 
