@@ -1,3 +1,28 @@
+<script lang="ts">
+    import { onMount } from "svelte";
+    import { API_URL } from "$lib/db";
+
+    let address = $state("Edo. Aragua, Venezuela");
+    let mapsUrl = $state("");
+    let whatsapp = $state("");
+
+    onMount(async () => {
+        try {
+            const res = await fetch(`${API_URL}/settings/`);
+            const data = await res.json();
+            address = data.address || "Edo. Aragua, Venezuela";
+            mapsUrl = data.maps_url || "";
+            whatsapp = data.whatsapp_number || "";
+        } catch (e) {
+            console.error("Footer settings fetch error:", e);
+        }
+    });
+
+    const formatWhatsapp = (num: string) => {
+        return `https://wa.me/${num.replace(/[^0-9]/g, '')}`;
+    };
+</script>
+
 <footer class="bg-neutral-900 text-neutral-400 py-20 px-4 md:px-12 border-t border-neutral-800 relative z-20">
     <div class="max-w-7xl mx-auto">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16 px-4">
@@ -31,20 +56,33 @@
             <div class="space-y-6">
                 <h4 class="text-white font-bold uppercase tracking-widest text-sm">Contacto</h4>
                 <ul class="space-y-4">
-                    <li class="flex items-start gap-3">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
-                        Edo. Aragua, Venezuela
+                    <li>
+                        {#if mapsUrl}
+                            <a href={mapsUrl} target="_blank" rel="noopener noreferrer" class="flex items-start gap-3 hover:text-white transition-colors group">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="group-hover:scale-110 transition-transform"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                                <span class="leading-tight">{address}</span>
+                            </a>
+                        {:else}
+                            <div class="flex items-start gap-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                                <span class="leading-tight">{address}</span>
+                            </div>
+                        {/if}
                     </li>
-                    <li class="flex items-start gap-3 text-brand-orange font-bold">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
-                        WhatsApp Directo
+                    <li>
+                        {#if whatsapp}
+                             <a href={formatWhatsapp(whatsapp)} target="_blank" rel="noopener noreferrer" class="flex items-start gap-3 text-brand-orange font-bold hover:scale-105 transition-transform origin-left">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
+                                WhatsApp Directo
+                            </a>
+                        {/if}
                     </li>
                 </ul>
             </div>
         </div>
 
         <div class="pt-12 border-t border-neutral-800 flex flex-col md:flex-row justify-between items-center gap-6">
-            <p class="text-sm">© 2024 Ale-Det Arreglos Florales. Todos los derechos reservados.</p>
+            <p class="text-sm">© 2024 Alejandra Detalles. Todos los derechos reservados.</p>
             <div class="flex items-center gap-2">
                 <span class="text-xs font-bold uppercase tracking-tighter">Hecho con</span>
                 <span class="text-brand-red">❤</span>
