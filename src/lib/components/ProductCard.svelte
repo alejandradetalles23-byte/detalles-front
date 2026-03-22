@@ -10,7 +10,7 @@
   const waLink = getWhatsAppLink(product.title, product.price);
 </script>
 
-<div class="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-neutral-100 flex flex-col h-full transform hover:-translate-y-1">
+<div class="group bg-white dark:bg-neutral-900 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-neutral-100 dark:border-neutral-800 flex flex-col h-full transform hover:-translate-y-1">
   <!-- Image -->
   <a href="/producto/{product.id}" class="relative aspect-[4/5] overflow-hidden">
     <img
@@ -26,10 +26,10 @@
   <!-- Content -->
   <div class="p-6 flex flex-col flex-grow">
     <div class="flex justify-between items-start mb-2">
-      <h3 class="text-lg font-bold text-neutral-800 line-clamp-1">{product.title}</h3>
+      <h3 class="text-lg font-bold text-neutral-800 dark:text-neutral-100 line-clamp-1">{product.title}</h3>
       <span class="text-lg font-bold text-brand-red">${product.price.toFixed(2)}</span>
     </div>
-    <p class="text-neutral-500 text-sm line-clamp-2 mb-6 flex-grow">
+    <p class="text-neutral-500 dark:text-neutral-400 text-sm line-clamp-2 mb-6 flex-grow">
       {product.description}
     </p>
 

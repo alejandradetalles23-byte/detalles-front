@@ -7,6 +7,8 @@
   let adminName = $state("Administrador");
   let address = $state("Edo. Aragua, Venezuela");
   let mapsUrl = $state("");
+  let instagramUrl = $state("");
+  let footerText = $state("");
   let logoUrl = $state<string | null>(null);
   let avatarUrl = $state<string | null>(null);
   
@@ -28,6 +30,8 @@
         adminName = data.admin_name || "Administrador";
         address = data.address || "Edo. Aragua, Venezuela";
         mapsUrl = data.maps_url || "";
+        instagramUrl = data.instagram_url || "";
+        footerText = data.footer_text || "";
     } catch (e) {
         console.error(e);
     } finally {
@@ -45,6 +49,8 @@
     formData.append("admin_name", adminName);
     formData.append("address", address);
     formData.append("maps_url", mapsUrl);
+    formData.append("instagram_url", instagramUrl);
+    formData.append("footer_text", footerText);
     if (logoFile) formData.append("logo", logoFile);
     if (avatarFile) formData.append("avatar", avatarFile);
 
@@ -157,14 +163,38 @@
                 </div>
             </div>
 
-            <div>
-                <label class="block text-xs font-black text-neutral-400 uppercase tracking-widest mb-4 px-2">Texto "Sobre Nosotros"</label>
-                <textarea 
-                    bind:value={aboutText} 
-                    required 
-                    rows="4"
-                    class="w-full px-6 py-6 bg-neutral-50 border border-neutral-200 rounded-3xl outline-none focus:ring-4 focus:ring-brand-violet/10 focus:border-brand-violet transition-all text-lg leading-relaxed resize-none"
-                ></textarea>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                     <label class="block text-xs font-black text-neutral-400 uppercase tracking-widest mb-4 px-2">Enlace Instagram</label>
+                     <div class="flex items-center gap-4 group">
+                          <div class="w-14 h-14 rounded-2xl bg-pink-50 text-pink-500 flex items-center justify-center shrink-0">
+                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                         </div>
+                         <input type="url" bind:value={instagramUrl} placeholder="https://instagram.com/..." class="flex-grow px-6 py-4 bg-neutral-50 border border-neutral-200 rounded-2xl outline-none focus:ring-4 focus:ring-brand-violet/10 focus:border-brand-violet transition-all text-sm font-medium" />
+                     </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="space-y-4">
+                    <label class="block text-xs font-black text-neutral-400 uppercase tracking-widest px-2">Texto Página "Sobre Nosotros"</label>
+                    <textarea 
+                        bind:value={aboutText} 
+                        required 
+                        rows="4"
+                        class="w-full px-6 py-6 bg-neutral-50 border border-neutral-200 rounded-3xl outline-none focus:ring-4 focus:ring-brand-violet/10 focus:border-brand-violet transition-all text-lg leading-relaxed resize-none"
+                    ></textarea>
+                </div>
+                <div class="space-y-4">
+                    <label class="block text-xs font-black text-neutral-400 uppercase tracking-widest px-2">Texto del Pie de Página (Footer)</label>
+                    <textarea 
+                        bind:value={footerText} 
+                        required 
+                        rows="4"
+                        placeholder="Transformamos sentimientos en arte floral..."
+                        class="w-full px-6 py-6 bg-neutral-50 border border-neutral-200 rounded-3xl outline-none focus:ring-4 focus:ring-brand-violet/10 focus:border-brand-violet transition-all text-lg leading-relaxed resize-none"
+                    ></textarea>
+                </div>
             </div>
 
             <div class="pt-6 border-t border-neutral-100 flex justify-end">

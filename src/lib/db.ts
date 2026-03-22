@@ -149,3 +149,13 @@ export async function deleteProduct(id: number): Promise<boolean> {
         return false;
     }
 }
+export async function getSettings() {
+    try {
+        const res = await fetch(`${API_URL}/settings/`);
+        if (!res.ok) throw new Error("Error fetching settings");
+        return await res.json();
+    } catch (e) {
+        console.error(e);
+        return null;
+    }
+}

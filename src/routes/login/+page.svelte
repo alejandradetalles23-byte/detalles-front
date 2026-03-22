@@ -3,6 +3,7 @@
   
   let username = $state("");
   let password = $state("");
+  let showPassword = $state(false);
   let error = $state("");
   let loading = $state(false);
 
@@ -13,8 +14,8 @@
 
     try {
         const formData = new FormData();
-        formData.append("username", username);
-        formData.append("password", password);
+        formData.append("username", username.trim());
+        formData.append("password", password.trim());
 
         const res = await fetch(`${API_URL}/auth/login`, {
             method: "POST",
@@ -65,6 +66,10 @@
           id="username"
           bind:value={username}
           required
+          autocapitalize="none"
+          autocorrect="off"
+          spellcheck="false"
+          autocomplete="username"
           class="w-full px-5 py-4 bg-neutral-50 border border-neutral-200 rounded-2xl focus:ring-4 focus:ring-brand-orange/10 focus:border-brand-orange outline-none transition-all placeholder:text-neutral-300"
           placeholder="Tu usuario"
         />
@@ -72,14 +77,28 @@
 
       <div>
         <label for="password" class="block text-sm font-bold text-neutral-700 mb-2 px-1">Contraseña</label>
-        <input
-          type="password"
-          id="password"
-          bind:value={password}
-          required
-          class="w-full px-5 py-4 bg-neutral-50 border border-neutral-200 rounded-2xl focus:ring-4 focus:ring-brand-orange/10 focus:border-brand-orange outline-none transition-all placeholder:text-neutral-300"
-          placeholder="••••••••"
-        />
+        <div class="relative group">
+            <input
+              type={showPassword ? "text" : "password"}
+              id="password"
+              bind:value={password}
+              required
+              class="w-full px-5 py-4 bg-neutral-50 border border-neutral-200 rounded-2xl focus:ring-4 focus:ring-brand-orange/10 focus:border-brand-orange outline-none transition-all placeholder:text-neutral-300 pr-14"
+              placeholder="••••••••"
+            />
+            <button 
+                type="button"
+                onclick={() => showPassword = !showPassword}
+                class="absolute right-4 top-1/2 -translate-y-1/2 p-2 text-neutral-400 hover:text-brand-orange transition-colors"
+                aria-label={showPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
+            >
+                {#if showPassword}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/><path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"/><path d="M6.61 6.61A13.52 13.52 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"/><line x1="2" x2="22" y1="2" y2="22"/></svg>
+                {:else}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+                {/if}
+            </button>
+        </div>
       </div>
 
       <button
