@@ -138,31 +138,31 @@
 </div>
 
 {#if showModal}
-    <div class="fixed inset-0 bg-neutral-900/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 overflow-y-auto">
-        <div class="bg-white w-full max-w-4xl rounded-[3rem] shadow-2xl border border-neutral-100 relative overflow-hidden animate-in zoom-in-95 duration-300">
-            <button onclick={() => showModal = false} class="absolute top-8 right-8 text-neutral-400 hover:text-neutral-900 transition-all">
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    <div class="fixed inset-0 bg-neutral-900/80 backdrop-blur-sm z-50 flex items-center justify-center p-2 sm:p-4 overflow-y-auto">
+        <div class="bg-white w-full max-w-4xl rounded-3xl sm:rounded-[3rem] shadow-2xl border border-neutral-100 relative overflow-hidden animate-in zoom-in-95 duration-300 my-auto">
+            <button onclick={() => showModal = false} class="absolute top-4 right-4 sm:top-8 sm:right-8 text-neutral-400 hover:text-neutral-900 transition-all z-20">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="sm:w-8 sm:h-8"><path d="M18 6 6 18M6 6l12 12"/></svg>
             </button>
 
-            <form onsubmit={handleSubmit} class="p-12 space-y-8">
-                <h3 class="text-3xl font-black text-neutral-900 font-serif">
+            <form onsubmit={handleSubmit} class="p-6 sm:p-12 space-y-6 sm:space-y-8">
+                <h3 class="text-xl sm:text-3xl font-black text-neutral-900 font-serif pr-8">
                     {editingId ? 'Editar Arreglo' : 'Nuevo Arreglo Floral'}
                 </h3>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
                     <div class="space-y-6">
                         <div>
                             <label class="block text-[10px] font-black text-neutral-400 uppercase tracking-widest mb-2 px-1">Título del Arreglo</label>
-                            <input type="text" bind:value={title} required class="w-full px-6 py-4 bg-neutral-50 border border-neutral-100 rounded-2xl outline-none focus:ring-4 focus:ring-brand-violet/10 font-bold text-neutral-900 " />
+                            <input type="text" bind:value={title} required class="w-full px-4 sm:px-6 py-3 sm:py-4 bg-neutral-50 border border-neutral-100 rounded-xl sm:rounded-2xl outline-none focus:ring-4 focus:ring-brand-violet/10 font-bold text-neutral-900 " />
                         </div>
                         <div class="grid grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-[10px] font-black text-neutral-400 uppercase tracking-widest mb-2 px-1">Precio ($)</label>
-                                <input type="number" bind:value={price} required class="w-full px-6 py-4 bg-neutral-50 border border-neutral-100 rounded-2xl outline-none focus:ring-4 focus:ring-brand-violet/10 font-bold text-neutral-900 " />
+                                <input type="number" bind:value={price} required class="w-full px-4 sm:px-6 py-3 sm:py-4 bg-neutral-50 border border-neutral-100 rounded-xl sm:rounded-2xl outline-none focus:ring-4 focus:ring-brand-violet/10 font-bold text-neutral-900 " />
                             </div>
                             <div>
                                 <label class="block text-[10px] font-black text-neutral-400 uppercase tracking-widest mb-2 px-1">Categoría</label>
-                                <select bind:value={categoryId} class="w-full px-6 py-4 bg-neutral-50 border border-neutral-100 rounded-2xl outline-none focus:ring-4 focus:ring-brand-violet/10 font-bold appearance-none text-neutral-900 ">
+                                <select bind:value={categoryId} class="w-full px-4 sm:px-6 py-3 sm:py-4 bg-neutral-50 border border-neutral-100 rounded-xl sm:rounded-2xl outline-none focus:ring-4 focus:ring-brand-violet/10 font-bold appearance-none text-neutral-900 ">
                                     <option value={null} class="">Sin categoría</option>
                                     {#each categories as cat}
                                         <option value={cat.id} class="">{cat.name}</option>
@@ -172,7 +172,7 @@
                         </div>
                         <div>
                             <label class="block text-[10px] font-black text-neutral-400 uppercase tracking-widest mb-2 px-1">Descripción</label>
-                            <textarea bind:value={description} required rows="4" class="w-full px-6 py-4 bg-neutral-50 border border-neutral-100 rounded-2xl outline-none focus:ring-4 focus:ring-brand-violet/10 font-medium resize-none text-neutral-900 "></textarea>
+                            <textarea bind:value={description} required rows="3" class="w-full px-4 sm:px-6 py-3 sm:py-4 bg-neutral-50 border border-neutral-100 rounded-xl sm:rounded-2xl outline-none focus:ring-4 focus:ring-brand-violet/10 font-medium resize-none text-neutral-900 "></textarea>
                         </div>
                     </div>
 
@@ -197,9 +197,9 @@
                     </div>
                 </div>
 
-                <div class="flex justify-end gap-4 pt-4">
-                    <button type="button" onclick={() => showModal = false} class="px-8 py-4 text-neutral-400 font-black tracking-widest uppercase text-xs hover:text-neutral-900 transition-all">Cancelar</button>
-                    <button type="submit" disabled={saving} class="px-10 py-4 btn-primary rounded-2xl shadow-xl disabled:opacity-50">
+                <div class="flex flex-col sm:flex-row justify-end gap-3 sm:gap-4 pt-4">
+                    <button type="button" onclick={() => showModal = false} class="w-full sm:w-auto px-8 py-3 sm:py-4 text-neutral-400 font-black tracking-widest uppercase text-xs hover:text-neutral-900 transition-all border border-neutral-100 sm:border-none rounded-xl">Cancelar</button>
+                    <button type="submit" disabled={saving} class="w-full sm:w-auto px-10 py-3 sm:py-4 btn-primary rounded-xl sm:rounded-2xl shadow-xl disabled:opacity-50 text-sm">
                         {saving ? 'GUARDANDO...' : editingId ? 'ACTUALIZAR' : 'CREAR ARREGLO'}
                     </button>
                 </div>
