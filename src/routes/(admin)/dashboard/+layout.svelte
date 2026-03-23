@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
+  import { getSettings } from "$lib/db";
   import "../../layout.css";
   
   let { children } = $props();
@@ -13,13 +14,10 @@
         return;
     }
     
-    try {
-        const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/settings/`);
-        const data = await res.json();
-        username = data.admin_name || "Administrador";
-        avatarUrl = data.admin_avatar_url;
-    } catch (e) {
-        console.error("Error fetching admin settings:", e);
+    const settings = await getSettings();
+    if (settings) {
+        username = settings.admin_name || "Administrador";
+        avatarUrl = settings.admin_avatar_url;
     }
   });
 
