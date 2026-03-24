@@ -3,24 +3,35 @@
 @plugin '@tailwindcss/typography';
 
 @theme {
-  --color-brand-red: #ef4444;
-  --color-brand-orange: #f97316;
-  --color-brand-violet: #8b5cf6;
-  
+  /* 🌸 Paleta Pastel Floral */
+  --color-brand-rose: #f4a5b8;       /* Rosa pastel principal */
+  --color-brand-rose-dark: #e8809a;  /* Rosa más intenso para hover/accents */
+  --color-brand-blush: #fce4ec;      /* Rosa pálido / blush */
+  --color-brand-gold: #f6d365;       /* Amarillo dorado cálido */
+  --color-brand-cream: #fff9e6;      /* Crema suave */
+  --color-brand-sky: #a8d8ea;        /* Azul cielo pastel */
+  --color-brand-sky-dark: #7ec8e3;   /* Azul cielo más intenso */
+  --color-brand-lavender: #d4b8e0;   /* Lavanda suave */
+
+  /* Colores legacy (mapeados a la nueva paleta para que nada se rompa) */
+  --color-brand-red: #f4a5b8;
+  --color-brand-orange: #f6d365;
+  --color-brand-violet: #d4b8e0;
+
   --font-serif: 'Playfair Display', serif;
   --font-sans: 'Inter', system-ui, sans-serif;
 }
 
 :root {
-  --brand-gradient: linear-gradient(135deg, var(--color-brand-violet), var(--color-brand-orange));
+  --brand-gradient: linear-gradient(135deg, var(--color-brand-rose), var(--color-brand-gold), var(--color-brand-sky));
 }
 
 .btn-primary {
-  @apply bg-linear-to-r from-brand-violet to-brand-orange text-white font-bold transition-all shadow-lg hover:shadow-brand-violet/20 hover:scale-[1.02] active:scale-[0.98] cursor-pointer;
+  @apply bg-linear-to-r from-brand-rose to-brand-sky text-white font-bold transition-all shadow-lg hover:shadow-brand-rose/30 hover:scale-[1.02] active:scale-[0.98] cursor-pointer;
 }
 
 body {
-  @apply bg-neutral-50 text-neutral-900 antialiased font-sans min-h-screen selection:bg-brand-violet selection:text-white;
+  @apply bg-white text-neutral-800 antialiased font-sans min-h-screen selection:bg-brand-rose/30 selection:text-brand-rose-dark;
 }
 
 h1, h2, h3, h4, h5, h6 {

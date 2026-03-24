@@ -20,6 +20,15 @@ export interface Category {
     name: string;
 }
 
+export interface Comment {
+    id: number;
+    arrangement_id: number;
+    author_name: string;
+    content: string;
+    is_approved: boolean;
+    created_at: string;
+}
+
 export interface Stats {
     completed_sales: number;
     cancelled_sales: number;
@@ -81,9 +90,19 @@ export async function getCategories(): Promise<Category[]> {
  */
 export async function getStats(): Promise<Stats | null> {
     try {
+        const token = localStorage.getItem("token");
+        if (!token) {
+            if (typeof window !== "undefined") window.location.href = "/login";
+            return null;
+        }
         const res = await fetch(`${API_URL}/stats/`, {
-            headers: { "Authorization": `Bearer ${localStorage.getItem("token")}` }
+            headers: { "Authorization": `Bearer ${token}` }
         });
+        if (res.status === 401) {
+            localStorage.removeItem("token");
+            if (typeof window !== "undefined") window.location.href = "/login";
+            return null;
+        }
         if (!res.ok) throw new Error("Unauthorized or Error");
         return await res.json();
     } catch (e) {
@@ -111,6 +130,75 @@ export async function registerLike(id: number): Promise<void> {
         await fetch(`${API_URL}/stats/like/${id}`, { method: "POST" });
     } catch (e) {
         console.error(e);
+    }
+}
+
+/**
+ * Quita un 'Me gusta' de producto en el backend (decrementa contador en DB)
+ */
+export async function registerUnlike(id: number): Promise<void> {
+    try {
+        await fetch(`${API_URL}/stats/unlike/${id}`, { method: "POST" });
+    } catch (e) {
+        console.error(e);
+    }
+}
+
+// --- Utilidades de localStorage para likes ---
+const LIKES_KEY = "ale_det_liked_products";
+
+export function isLiked(productId: number): boolean {
+    if (typeof localStorage === "undefined") return false;
+    const liked: number[] = JSON.parse(localStorage.getItem(LIKES_KEY) || "[]");
+    return liked.includes(productId);
+}
+
+export function saveLike(productId: number): void {
+    if (typeof localStorage === "undefined") return;
+    const liked: number[] = JSON.parse(localStorage.getItem(LIKES_KEY) || "[]");
+    if (!liked.includes(productId)) {
+        liked.push(productId);
+        localStorage.setItem(LIKES_KEY, JSON.stringify(liked));
+    }
+}
+
+export function removeLike(productId: number): void {
+    if (typeof localStorage === "undefined") return;
+    const liked: number[] = JSON.parse(localStorage.getItem(LIKES_KEY) || "[]");
+    localStorage.setItem(LIKES_KEY, JSON.stringify(liked.filter(id => id !== productId)));
+}
+
+// --- Funciones de Comentarios ---
+
+/**
+ * Obtiene los comentarios aprobados de un arreglo
+ */
+export async function getComments(arrangementId: number): Promise<Comment[]> {
+    try {
+        const res = await fetch(`${API_URL}/arrangements/${arrangementId}/comments`);
+        if (!res.ok) throw new Error("Error fetching comments");
+        return await res.json();
+    } catch (e) {
+        console.error(e);
+        return [];
+    }
+}
+
+/**
+ * Publica un nuevo comentario para un arreglo
+ */
+export async function postComment(arrangementId: number, author_name: string, content: string): Promise<Comment | null> {
+    try {
+        const res = await fetch(`${API_URL}/arrangements/${arrangementId}/comments`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ author_name, content })
+        });
+        if (!res.ok) throw new Error("Error posting comment");
+        return await res.json();
+    } catch (e) {
+        console.error(e);
+        return null;
     }
 }
 /**

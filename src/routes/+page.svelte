@@ -23,7 +23,7 @@
   {#if loading}
     <div class="h-[60vh] flex items-center justify-center">
       <div
-        class="w-12 h-12 border-4 border-brand-violet border-t-transparent rounded-full animate-spin"
+        class="w-12 h-12 border-4 border-brand-rose border-t-transparent rounded-full animate-spin"
       ></div>
     </div>
   {:else}
@@ -39,9 +39,9 @@
       >
         <div>
           <h2
-            class="text-4xl md:text-5xl font-black text-neutral-900 mb-4 tracking-tight"
+            class="text-4xl md:text-5xl font-black text-neutral-800 mb-4 tracking-tight"
           >
-            Nuestros Arreglos
+            Nuestros <span class="bg-clip-text text-transparent bg-linear-to-r from-brand-rose-dark to-brand-sky-dark">Arreglos</span>
           </h2>
           <p class="text-neutral-500 max-w-lg font-medium">
             Descubre nuestra colección para cada ocasión especial.
@@ -61,12 +61,12 @@
 
   <!-- CTA Section -->
   <section
-    class="bg-gradient-to-br from-brand-red/90 via-brand-orange to-brand-violet rounded-[3rem] p-12 md:p-24 text-center text-white relative overflow-hidden"
+    class="bg-linear-to-br from-brand-rose/90 via-brand-gold/70 to-brand-sky/80 rounded-[3rem] p-12 md:p-24 text-center text-white relative overflow-hidden"
   >
     <div
       class="absolute inset-0 bg-white/10 opacity-20 pointer-events-none"
     ></div>
-    <h2 class="text-4xl md:text-6xl font-black mb-8 relative z-10">
+    <h2 class="text-4xl md:text-6xl font-black mb-8 relative z-10 drop-shadow-lg">
       ¿Buscas algo personalizado?
     </h2>
     <p class="text-xl opacity-90 mb-12 max-w-2xl mx-auto relative z-10">
@@ -77,9 +77,9 @@
       href={getWhatsappUrl(whatsapp)}
       target="_blank"
       rel="noopener noreferrer"
-      class="inline-block px-10 py-5 bg-white text-neutral-900 rounded-full font-black text-lg hover:shadow-2xl transition-all hover:scale-105 active:scale-95 relative z-10"
+      class="inline-block px-10 py-5 bg-white text-neutral-800 rounded-full font-black text-lg hover:shadow-2xl transition-all hover:scale-105 active:scale-95 relative z-10 shadow-xl"
     >
-      Hablar con Florista
+      🌸 Hablar con Florista
     </a>
   </section>
 </div>

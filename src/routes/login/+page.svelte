@@ -26,7 +26,6 @@
         
         if (!res.ok) throw new Error(data.detail || "Error al iniciar sesión");
 
-        // Almacenar token (ejemplo simple en localStorage)
         localStorage.setItem("token", data.access_token);
         window.location.href = "/";
     } catch (err: any) {
@@ -37,22 +36,22 @@
   }
 </script>
 
-<div class="min-h-screen flex items-center justify-center px-4 py-24 bg-neutral-50 transition-colors duration-500">
-  <div class="w-full max-w-md bg-white rounded-[2.5rem] p-10 shadow-2xl border border-neutral-100 relative overflow-hidden transition-colors">
+<div class="min-h-screen flex items-center justify-center px-4 py-24 bg-linear-to-br from-brand-blush/40 via-white to-brand-cream/40">
+  <div class="w-full max-w-md bg-white/80 backdrop-blur-xl rounded-[2.5rem] p-10 shadow-2xl shadow-brand-rose/10 border border-brand-blush/60 relative overflow-hidden">
     <!-- Decorative background -->
-    <div class="absolute -top-24 -right-24 w-48 h-48 bg-brand-red/10 rounded-full blur-3xl"></div>
-    <div class="absolute -bottom-24 -left-24 w-48 h-48 bg-brand-violet/10 rounded-full blur-3xl"></div>
+    <div class="absolute -top-24 -right-24 w-48 h-48 bg-brand-rose/15 rounded-full blur-3xl"></div>
+    <div class="absolute -bottom-24 -left-24 w-48 h-48 bg-brand-sky/15 rounded-full blur-3xl"></div>
 
     <div class="text-center mb-10 relative">
-      <div class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-brand-red to-brand-violet rounded-3xl text-white font-bold text-2xl mb-6 shadow-xl">
+      <div class="inline-flex items-center justify-center w-20 h-20 bg-linear-to-br from-brand-rose to-brand-sky rounded-3xl text-white font-bold text-2xl mb-6 shadow-xl shadow-brand-rose/20">
         AD
       </div>
-      <h1 class="text-4xl font-black text-neutral-900 mb-2 font-serif tracking-tight">Bienvenido</h1>
+      <h1 class="text-4xl font-black text-neutral-800 mb-2 font-serif tracking-tight">Bienvenido</h1>
       <p class="text-neutral-400 font-medium">Panel de administración Ale-Det</p>
     </div>
 
     {#if error}
-      <div class="mb-6 p-4 bg-red-50 text-red-600 rounded-2xl text-sm font-semibold border border-red-100 flex items-center gap-2 animate-in fade-in slide-in-from-top-4">
+      <div class="mb-6 p-4 bg-red-50 text-red-500 rounded-2xl text-sm font-semibold border border-red-100 flex items-center gap-2">
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
         {error}
       </div>
@@ -60,7 +59,7 @@
 
     <form onsubmit={handleSubmit} class="space-y-6 relative">
       <div>
-        <label for="username" class="block text-sm font-bold text-neutral-700 mb-2 px-1">Usuario</label>
+        <label for="username" class="block text-sm font-bold text-neutral-600 mb-2 px-1">Usuario</label>
         <input
           type="text"
           id="username"
@@ -70,26 +69,26 @@
           autocorrect="off"
           spellcheck="false"
           autocomplete="username"
-          class="w-full px-5 py-4 bg-neutral-50 border border-neutral-200 rounded-2xl focus:ring-4 focus:ring-brand-orange/10 focus:border-brand-orange outline-none transition-all placeholder:text-neutral-300 text-neutral-900"
+          class="w-full px-5 py-4 bg-white border border-brand-blush rounded-2xl focus:ring-4 focus:ring-brand-rose/10 focus:border-brand-rose outline-none transition-all placeholder:text-neutral-300 text-neutral-800"
           placeholder="Tu usuario"
         />
       </div>
 
       <div>
-        <label for="password" class="block text-sm font-bold text-neutral-700 mb-2 px-1">Contraseña</label>
+        <label for="password" class="block text-sm font-bold text-neutral-600 mb-2 px-1">Contraseña</label>
         <div class="relative group">
             <input
               type={showPassword ? "text" : "password"}
               id="password"
               bind:value={password}
               required
-              class="w-full px-5 py-4 bg-neutral-50 border border-neutral-200 rounded-2xl focus:ring-4 focus:ring-brand-orange/10 focus:border-brand-orange outline-none transition-all placeholder:text-neutral-300 pr-14 text-neutral-900"
+              class="w-full px-5 py-4 bg-white border border-brand-blush rounded-2xl focus:ring-4 focus:ring-brand-rose/10 focus:border-brand-rose outline-none transition-all placeholder:text-neutral-300 pr-14 text-neutral-800"
               placeholder="••••••••"
             />
             <button 
                 type="button"
                 onclick={() => showPassword = !showPassword}
-                class="absolute right-4 top-1/2 -translate-y-1/2 p-2 text-neutral-400 hover:text-brand-orange transition-colors"
+                class="absolute right-4 top-1/2 -translate-y-1/2 p-2 text-neutral-400 hover:text-brand-rose transition-colors"
                 aria-label={showPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
             >
                 {#if showPassword}
@@ -104,13 +103,13 @@
       <button
         type="submit"
         disabled={loading}
-        class="w-full py-5 rounded-2xl bg-neutral-900 text-white font-black text-lg hover:bg-neutral-800 shadow-xl transition-all active:scale-[0.98] disabled:opacity-50 disabled:cursor-wait"
+        class="w-full py-5 rounded-2xl bg-linear-to-r from-brand-rose to-brand-sky text-white font-black text-lg hover:shadow-xl hover:shadow-brand-rose/20 shadow-lg transition-all active:scale-[0.98] disabled:opacity-50 disabled:cursor-wait"
       >
         {loading ? 'Iniciando sesión...' : 'Entrar al Panel'}
       </button>
 
       <div class="text-center pt-4">
-        <a href="/" class="text-sm font-semibold text-neutral-400 hover:text-brand-red transition-colors">Volver a la tienda</a>
+        <a href="/" class="text-sm font-semibold text-neutral-400 hover:text-brand-rose-dark transition-colors">Volver a la tienda</a>
       </div>
     </form>
   </div>
